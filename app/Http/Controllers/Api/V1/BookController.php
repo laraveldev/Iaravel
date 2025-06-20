@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Book;
+use \App\Http\Requests\BookRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
@@ -62,18 +63,9 @@ class BookController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BookRequest $request)
     {
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'venue_id' => 'required|exists:venues,id',
-            'service_id' => 'required|exists:services,id',
-            'event_date' => 'required|date|after:today',
-            'event_time' => 'required|date_format:H:i',
-            'guests_count' => 'required|integer|min:1',
-            'total_price' => 'required|numeric|min:0',
-            'notes' => 'nullable|string|max:1000',
-        ]);
+
 
         $book = Book::create([
             'user_id' => $request->user_id,
@@ -100,7 +92,7 @@ class BookController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(BookRequest $request, $id)
     {
         $book = Book::find($id);
 
@@ -111,16 +103,6 @@ class BookController extends Controller
             ], 404);
         }
 
-        $request->validate([
-            'venue_id' => 'sometimes|required|exists:venues,id',
-            'service_id' => 'sometimes|required|exists:services,id',
-            'event_date' => 'sometimes|required|date|after:today',
-            'event_time' => 'sometimes|required|date_format:H:i',
-            'guests_count' => 'sometimes|required|integer|min:1',
-            'total_price' => 'sometimes|required|numeric|min:0',
-            'status' => 'sometimes|required|in:pending,confirmed,cancelled,completed',
-            'notes' => 'nullable|string|max:1000',
-        ]);
 
         $updateData = $request->only([
             'venue_id', 'service_id', 'event_date', 'guests_count', 

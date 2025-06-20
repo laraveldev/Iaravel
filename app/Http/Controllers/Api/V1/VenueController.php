@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Models\Venue;
 use Illuminate\Http\Request;
+use \App\Http\Requests\VenueRequest;
 use Illuminate\Support\Facades\Cache;
 
 class VenueController extends Controller
@@ -54,17 +55,9 @@ class VenueController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(VenueRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'location' => 'required|string|max:255',
-            'capacity' => 'required|integer|min:1',
-            'price' => 'required|numeric|min:0',
-            'description' => 'nullable|string',
-            'phone' => 'nullable|string|max:20',
-            'email' => 'nullable|email|max:255',
-        ]);
+
 
         $venue = Venue::create($request->all());
 
@@ -81,7 +74,7 @@ class VenueController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(VenueRequest $request, $id)
     {
         $venue = Venue::find($id);
 
@@ -92,15 +85,7 @@ class VenueController extends Controller
             ], 404);
         }
 
-        $request->validate([
-            'name' => 'sometimes|required|string|max:255',
-            'location' => 'sometimes|required|string|max:255',
-            'capacity' => 'sometimes|required|integer|min:1',
-            'price' => 'sometimes|required|numeric|min:0',
-            'description' => 'nullable|string',
-            'phone' => 'nullable|string|max:20',
-            'email' => 'nullable|email|max:255',
-        ]);
+
 
         $venue->update($request->all());
 
