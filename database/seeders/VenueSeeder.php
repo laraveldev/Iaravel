@@ -25,7 +25,7 @@ class VenueSeeder extends Seeder
                 'is_active' => true,
             ],
             [
-                'name' => 'Yunusobod Palace',
+                'name' => 'Yunusobod',
                 'location' => 'Yunusobod tumani, Toshkent',
                 'capacity' => 300,
                 'price' => 8000000.00,
@@ -35,7 +35,7 @@ class VenueSeeder extends Seeder
                 'is_active' => true,
             ],
             [
-                'name' => 'Sergeli Wedding Hall',
+                'name' => 'Sergeli',
                 'location' => 'Sergeli tumani, Toshkent',
                 'capacity' => 150,
                 'price' => 3500000.00,
@@ -45,7 +45,7 @@ class VenueSeeder extends Seeder
                 'is_active' => true,
             ],
             [
-                'name' => 'Mirzo Ulugbek Grand Hall',
+                'name' => 'Mirzo Ulugbek',
                 'location' => 'Mirzo Ulugbek tumani, Toshkent',
                 'capacity' => 400,
                 'price' => 12000000.00,
@@ -55,7 +55,7 @@ class VenueSeeder extends Seeder
                 'is_active' => true,
             ],
             [
-                'name' => 'Bektemir Lux',
+                'name' => 'Bektemir',
                 'location' => 'Bektemir tumani, Toshkent',
                 'capacity' => 120,
                 'price' => 2800000.00,
