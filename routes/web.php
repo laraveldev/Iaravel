@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\HomeController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['api.rate_limit'])->group(function () {
