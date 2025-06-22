@@ -12,7 +12,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->alias(['api.rate_limit' => \App\Http\Middleware\ApiRateLimit::class]);
+        $middleware->group('api', [
+            'api.rate_limit',
+        ]);
     })
     ->withSchedule(function ($schedule) {
         $schedule->command('cache:refresh-daily')->dailyAt('00:00');

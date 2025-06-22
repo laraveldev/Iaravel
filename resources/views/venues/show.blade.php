@@ -12,21 +12,21 @@
             </div>
             <div class="card-body">
                 <ul class="list-group list-group-flush mb-3">
-                    <li class="list-group-item"><strong>Manzil:</strong> {{ $venue->location }}</li>
-                    <li class="list-group-item"><strong>Sig'im:</strong> {{ $venue->capacity }} kishi</li>
+                    <li class="list-group-item"><strong>Manzil:</strong> {{ e($venue->location) }}</li>
+                    <li class="list-group-item"><strong>Sig'im:</strong> {{ e($venue->capacity) }} kishi</li>
                     <li class="list-group-item"><strong>Narx:</strong> <span class="text-success">{{ number_format($venue->price, 0, '.', ' ') }} so'm</span></li>
                     @if($venue->phone)
-                        <li class="list-group-item"><strong>Telefon:</strong> {{ $venue->phone }}</li>
+                        <li class="list-group-item"><strong>Telefon:</strong> {{ e($venue->phone) }}</li>
                     @endif
                     @if($venue->email)
-                        <li class="list-group-item"><strong>Email:</strong> {{ $venue->email }}</li>
+                        <li class="list-group-item"><strong>Email:</strong> {{ e($venue->email) }}</li>
                     @endif
                     <li class="list-group-item"><strong>Holati:</strong> {!! $venue->is_active ? '<span class="badge bg-success">Aktiv</span>' : '<span class="badge bg-secondary">Noaktiv</span>' !!}</li>
                 </ul>
                 @if($venue->description)
                     <div class="mb-3">
                         <strong>Tavsif:</strong>
-                        <div class="border rounded p-2 bg-light">{{ $venue->description }}</div>
+                        <div class="border rounded p-2 bg-light">{{ e($venue->description) }}</div>
                     </div>
                 @endif
                 <a href="/venues" class="btn btn-outline-primary"><i class="fas fa-arrow-left me-1"></i>Orqaga</a>

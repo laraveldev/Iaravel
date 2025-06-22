@@ -12,17 +12,17 @@
             </div>
             <div class="card-body">
                 <ul class="list-group list-group-flush mb-3">
-                    <li class="list-group-item"><strong>Muallif:</strong> {{ $book->author }}</li>
-                    <li class="list-group-item"><strong>Janr:</strong> {{ $book->genre }}</li>
-                    <li class="list-group-item"><strong>Yili:</strong> {{ $book->published_year }}</li>
+                    <li class="list-group-item"><strong>Muallif:</strong> {{ e($book->author) }}</li>
+                    <li class="list-group-item"><strong>Janr:</strong> {{ e($book->genre) }}</li>
+                    <li class="list-group-item"><strong>Yili:</strong> {{ e($book->published_year) }}</li>
                     @if($book->cover_image)
-                        <li class="list-group-item"><strong>Muqova:</strong> <a href="{{ $book->cover_image }}" target="_blank">Ko'rish</a></li>
+                        <li class="list-group-item"><strong>Muqova:</strong> <a href="{{ e($book->cover_image) }}" target="_blank">Ko'rish</a></li>
                     @endif
                 </ul>
                 @if($book->description)
                     <div class="mb-3">
                         <strong>Izoh:</strong>
-                        <div class="border rounded p-2 bg-light">{{ $book->description }}</div>
+                        <div class="border rounded p-2 bg-light">{{ e($book->description) }}</div>
                     </div>
                 @endif
                 <a href="/books" class="btn btn-outline-secondary"><i class="fas fa-arrow-left me-1"></i>Orqaga</a>

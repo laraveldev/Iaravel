@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BookRequest;
 use App\Models\Book;
 use Illuminate\Http\Request;
 
@@ -35,16 +36,9 @@ class BookController extends Controller
     }
 
     // Store a new book
-    public function store(Request $request)
+    public function store(BookRequest $request)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'author' => 'required|string|max:255',
-            'description' => 'required|string',
-            'published_year' => 'required|integer',
-            'genre' => 'required|string|max:100',
-            'cover_image' => 'nullable|string',
-        ]);
+        $validated = $request->validated();
         $book = Book::create($validated);
         return response()->json([
             'success' => true,
@@ -54,7 +48,7 @@ class BookController extends Controller
     }
 
     // Update a book
-    public function update(Request $request, $id)
+    public function update(BookRequest $request, $id)
     {
         $book = Book::find($id);
         if (!$book) {
@@ -63,14 +57,7 @@ class BookController extends Controller
                 'message' => 'Book not found'
             ], 404);
         }
-        $validated = $request->validate([
-            'title' => 'sometimes|required|string|max:255',
-            'author' => 'sometimes|required|string|max:255',
-            'description' => 'sometimes|required|string',
-            'published_year' => 'sometimes|required|integer',
-            'genre' => 'sometimes|required|string|max:100',
-            'cover_image' => 'nullable|string',
-        ]);
+        $validated = $request->validated();
         $book->update($validated);
         return response()->json([
             'success' => true,
