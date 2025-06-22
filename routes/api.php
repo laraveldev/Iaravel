@@ -7,17 +7,14 @@ use App\Http\Controllers\Api\V1\BookController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['api.rate_limit'])->prefix('v1')->group(function () {
-    // Venues API
-    Route::apiResource('venues', VenueController::class);
-    
-    // Services API
+
+    Route::apiResource('venues', VenueController::class);    
+
     Route::apiResource('services', ServiceController::class);
-    
-    // Books API
+
     Route::apiResource('brons', BronController::class);
     Route::apiResource('books', BookController::class);
     
-    // Additional booking actions
     Route::patch('brons/{id}/confirm', [BronController::class, 'confirm']);
     Route::patch('brons/{id}/cancel', [BronController::class, 'cancel']);
 });
