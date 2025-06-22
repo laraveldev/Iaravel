@@ -6,7 +6,7 @@ use App\Http\Controllers\Api\V1\BronController;
 use App\Http\Controllers\Api\V1\BookController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('v1')->group(function () {
+Route::middleware(['api.rate_limit'])->prefix('v1')->group(function () {
     // Venues API
     Route::apiResource('venues', VenueController::class);
     
