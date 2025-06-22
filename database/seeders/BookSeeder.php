@@ -2,61 +2,55 @@
 
 namespace Database\Seeders;
 
-use App\Models\Book;
-use App\Models\User;
-use App\Models\Venue;
-use App\Models\Service;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Carbon\Carbon;
+use App\Models\Book;
 
 class BookSeeder extends Seeder
 {
-    /**
-     * Run the database seeder.
-     */
     public function run(): void
     {
-        $user = User::first();
-        $venues = Venue::all();
-        $services = Service::all();
-
         $books = [
             [
-                'user_id' => $user->id,
-                'venue_id' => $venues->random()->id,
-                'service_id' => $services->random()->id,
-                'event_date' => Carbon::now()->addDays(30)->toDateString(),
-                'event_time' => Carbon::now()->addDays(30)->setTime(18, 0, 0),
-                'guests_count' => 150,
-                'total_price' => 8500000.00,
-                'status' => 'confirmed',
-                'notes' => 'Katta to\'y marosimi. Barcha qulayliklar kerak.',
+                'title' => 'The Wedding Planner',
+                'author' => 'Sarah Joy',
+                'description' => 'A complete guide to planning the perfect wedding.',
+                'published_year' => 2018,
+                'genre' => 'Guide',
+                'cover_image' => null,
             ],
             [
-                'user_id' => $user->id,
-                'venue_id' => $venues->random()->id,
-                'service_id' => $services->random()->id,
-                'event_date' => Carbon::now()->addDays(45)->toDateString(),
-                'event_time' => Carbon::now()->addDays(45)->setTime(19, 0, 0),
-                'guests_count' => 80,
-                'total_price' => 4200000.00,
-                'status' => 'pending',
-                'notes' => 'Kichik oilaviy tadbirlar.',
+                'title' => 'Love & Traditions',
+                'author' => 'Otabek Mirzayev',
+                'description' => 'Stories and traditions of Uzbek weddings.',
+                'published_year' => 2020,
+                'genre' => 'Culture',
+                'cover_image' => null,
             ],
             [
-                'user_id' => $user->id,
-                'venue_id' => $venues->random()->id,
-                'service_id' => $services->random()->id,
-                'event_date' => Carbon::now()->addDays(60)->toDateString(),
-                'event_time' => Carbon::now()->addDays(60)->setTime(17, 30, 0),
-                'guests_count' => 200,
-                'total_price' => 12000000.00,
-                'status' => 'confirmed',
-                'notes' => 'Premium xizmat kerak.',
+                'title' => 'Wedding Stories',
+                'author' => 'Lola Karimova',
+                'description' => 'Heartwarming wedding stories from around the world.',
+                'published_year' => 2017,
+                'genre' => 'Stories',
+                'cover_image' => null,
+            ],
+            [
+                'title' => 'Bridal Fashion',
+                'author' => 'Dilnoza Akbarova',
+                'description' => 'A look at wedding dresses and fashion trends.',
+                'published_year' => 2019,
+                'genre' => 'Fashion',
+                'cover_image' => null,
+            ],
+            [
+                'title' => 'Wedding Cuisine',
+                'author' => 'Jasur Rahmatov',
+                'description' => 'Traditional and modern wedding dishes.',
+                'published_year' => 2021,
+                'genre' => 'Cooking',
+                'cover_image' => null,
             ],
         ];
-
         foreach ($books as $book) {
             Book::create($book);
         }

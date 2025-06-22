@@ -29,9 +29,9 @@ class Service extends Model
     }
 
     // Relations
-    public function books()
+    public function brons()
     {
-        return $this->hasMany(Book::class);
+        return $this->hasMany(Bron::class);
     }
 }
 

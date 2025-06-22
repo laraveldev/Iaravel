@@ -89,6 +89,7 @@ class ServiceController extends Controller
 
 
         $service->update($request->all());
+        $service->refresh();
 
         // Clear cache
         Cache::forget('services_list');

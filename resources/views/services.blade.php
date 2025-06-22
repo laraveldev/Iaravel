@@ -108,6 +108,7 @@
                                         <i class="fas fa-ellipsis-v"></i>
                                     </button>
                                     <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="/services/${service.id}"><i class="fas fa-eye me-1"></i>Ko'rish</a></li>
                                         <li><a class="dropdown-item" href="#" onclick="editService(${service.id})">
                                             <i class="fas fa-edit me-1"></i>Tahrirlash
                                         </a></li>

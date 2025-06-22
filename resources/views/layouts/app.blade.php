@@ -67,8 +67,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/books">
+                        <a class="nav-link" href="/brons">
                             <i class="fas fa-calendar-check me-1"></i>Bronlashlar
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/books">
+                            <i class="fas fa-book me-1"></i>Kitoblar
                         </a>
                     </li>
                 </ul>

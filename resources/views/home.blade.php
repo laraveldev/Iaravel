@@ -12,30 +12,6 @@
                     <i class="fas fa-ring me-3"></i>To'y Zallari Boshqaruvi
                 </h1>
                 <p class="lead mb-4">To'y zallari, xizmatlar va bronlashlarni boshqaring</p>
-                <div class="row justify-content-center">
-                    <div class="col-md-8">
-                        <div class="row g-3">
-                            <div class="col-md-4">
-                                <a href="/venues" class="btn btn-light btn-lg w-100">
-                                    <i class="fas fa-building d-block mb-2"></i>
-                                    To'y Zallari
-                                </a>
-                            </div>
-                            <div class="col-md-4">
-                                <a href="/services" class="btn btn-light btn-lg w-100">
-                                    <i class="fas fa-concierge-bell d-block mb-2"></i>
-                                    Xizmatlar
-                                </a>
-                            </div>
-                            <div class="col-md-4">
-                                <a href="/books" class="btn btn-light btn-lg w-100">
-                                    <i class="fas fa-calendar-check d-block mb-2"></i>
-                                    Bronlashlar
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -66,7 +42,7 @@
             <div class="card-body">
                 <i class="fas fa-calendar-check fa-3x text-warning mb-3"></i>
                 <h5 class="card-title">Bronlashlar</h5>
-                <h2 class="text-warning mb-0" id="total-books">-</h2>
+                <h2 class="text-warning mb-0" id="total-brons">-</h2>
             </div>
         </div>
     </div>
@@ -75,7 +51,40 @@
             <div class="card-body">
                 <i class="fas fa-check-circle fa-3x text-info mb-3"></i>
                 <h5 class="card-title">Tasdiqlangan</h5>
-                <h2 class="text-info mb-0" id="confirmed-books">-</h2>
+                <h2 class="text-info mb-0" id="confirmed-brons">-</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <i class="fas fa-book fa-3x text-secondary mb-3"></i>
+                <h5 class="card-title">Kitoblar</h5>
+                <h2 class="text-secondary mb-0" id="total-books">-</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Popular Books -->
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="fas fa-book me-2"></i>Mashhur Kitoblar
+                </h5>
+                <a href="/books" class="btn btn-outline-primary btn-sm">
+                    Barchasini ko'rish <i class="fas fa-arrow-right ms-1"></i>
+                </a>
+            </div>
+            <div class="card-body">
+                <div class="row" id="popular-books">
+                    <div class="col-12 text-center">
+                        <i class="fas fa-spinner fa-spin fa-2x text-muted"></i>
+                        <p class="text-muted mt-2">Yuklanmoqda...</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -137,7 +146,7 @@
                 <h5 class="mb-0">
                     <i class="fas fa-clock me-2"></i>So'nggi Bronlashlar
                 </h5>
-                <a href="/books" class="btn btn-outline-primary btn-sm">
+                <a href="/brons" class="btn btn-outline-primary btn-sm">
                     Barchasini ko'rish <i class="fas fa-arrow-right ms-1"></i>
                 </a>
             </div>
@@ -153,7 +162,7 @@
                                 <th>Status</th>
                             </tr>
                         </thead>
-                        <tbody id="recent-books">
+                        <tbody id="recent-brons">
                             <tr>
                                 <td colspan="5" class="text-center">
                                     <i class="fas fa-spinner fa-spin"></i> Yuklanmoqda...
@@ -174,20 +183,25 @@
     async function loadDashboardData() {
         try {
             // Load statistics
-            const [venuesResponse, servicesResponse, booksResponse] = await Promise.all([
+            const [venuesResponse, servicesResponse, bronsResponse, booksResponse] = await Promise.all([
                 axios.get('/venues'),
                 axios.get('/services'),
+                axios.get('/brons'),
                 axios.get('/books')
             ]);
 
             // Update statistics
             document.getElementById('total-venues').textContent = venuesResponse.data.data.length;
             document.getElementById('total-services').textContent = servicesResponse.data.data.length;
+            document.getElementById('total-brons').textContent = bronsResponse.data.data.total;
             document.getElementById('total-books').textContent = booksResponse.data.data.total;
             
             // Count confirmed bookings
-            const confirmedCount = booksResponse.data.data.data.filter(book => book.status === 'confirmed').length;
-            document.getElementById('confirmed-books').textContent = confirmedCount;
+            const confirmedCount = bronsResponse.data.data.data.filter(bron => bron.status === 'confirmed').length;
+            document.getElementById('confirmed-brons').textContent = confirmedCount;
+
+            // Load popular books (first 3)
+            loadPopularBooks(booksResponse.data.data.data.slice(0, 3));
 
             // Load popular venues
             loadPopularVenues(venuesResponse.data.data.slice(0, 6));
@@ -196,11 +210,34 @@
             loadPopularServices(servicesResponse.data.data.slice(0, 8));
             
             // Load recent bookings
-            loadRecentBookings(booksResponse.data.data.data.slice(0, 5));
+            loadRecentBrons(bronsResponse.data.data.data.slice(0, 5));
 
         } catch (error) {
             console.error('Error loading dashboard data:', error);
         }
+    }
+
+    function loadPopularBooks(books) {
+        const container = document.getElementById('popular-books');
+        if (!books || books.length === 0) {
+            container.innerHTML = '<div class="col-12 text-center"><p class="text-muted">Kitoblar topilmadi</p></div>';
+            return;
+        }
+        container.innerHTML = books.map(book => `
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h6 class="card-title">${book.title}</h6>
+                        <p class="card-text text-muted small">
+                            <i class="fas fa-user me-1"></i>${book.author}
+                        </p>
+                        <span class="badge bg-primary mb-2">${book.genre}</span>
+                        <span class="badge bg-secondary mb-2">${book.published_year}</span>
+                        <p class="card-text small">${book.description}</p>
+                    </div>
+                </div>
+            </div>
+        `).join('');
     }
 
     function loadPopularVenues(venues) {
@@ -256,28 +293,28 @@
         `).join('');
     }
 
-    function loadRecentBookings(books) {
-        const container = document.getElementById('recent-books');
-        if (books.length === 0) {
+    function loadRecentBrons(brons) {
+        const container = document.getElementById('recent-brons');
+        if (brons.length === 0) {
             container.innerHTML = '<tr><td colspan="5" class="text-center text-muted">Bronlashlar topilmadi</td></tr>';
             return;
         }
 
-        container.innerHTML = books.map(book => {
-            const statusClass = `status-${book.status}`;
+        container.innerHTML = brons.map(bron => {
+            const statusClass = `status-${bron.status}`;
             const statusText = {
                 'pending': 'Kutilmoqda',
                 'confirmed': 'Tasdiqlangan',
                 'cancelled': 'Bekor qilingan',
                 'completed': 'Tugallangan'
-            }[book.status] || book.status;
+            }[bron.status] || bron.status;
 
             return `
                 <tr>
-                    <td>#${book.id}</td>
-                    <td>${book.venue.name}</td>
-                    <td>${book.service.name}</td>
-                    <td>${formatDate(book.event_date)}</td>
+                    <td>#${bron.id}</td>
+                    <td>${bron.venue.name}</td>
+                    <td>${bron.service.name}</td>
+                    <td>${formatDate(bron.event_date)}</td>
                     <td><span class="badge ${statusClass}">${statusText}</span></td>
                 </tr>
             `;
