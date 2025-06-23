@@ -21,7 +21,7 @@ class VenueController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $venues
+            'data'    => $venues
         ]);
     }
 
@@ -43,11 +43,11 @@ class VenueController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => [
-                'name' => $venue->name,
+            'data'    => [
+                'name'     => $venue->name,
                 'location' => $venue->location,
                 'capacity' => $venue->capacity,
-                'price' => $venue->price
+                'price'    => $venue->price
             ]
         ]);
     }
@@ -66,7 +66,7 @@ class VenueController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $venue,
+            'data'    => $venue,
             'message' => 'Venue created successfully'
         ], 201);
     }
@@ -95,7 +95,7 @@ class VenueController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $venue,
+            'data'    => $venue,
             'message' => 'Venue updated successfully'
         ]);
     }

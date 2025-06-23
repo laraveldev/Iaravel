@@ -23,14 +23,14 @@ class BronRequest extends FormRequest
     {
         return [
              
-            'user_id' => 'required|exists:users,id',
-            'venue_id' => 'required|exists:venues,id',
-            'service_id' => 'required|exists:services,id',
-            'event_date' => 'required|date|after:today',
-            'event_time' => 'required|date_format:H:i',
+            'user_id'      => 'required|exists:users,id',
+            'venue_id'     => 'required|exists:venues,id',
+            'service_id'   => 'required|exists:services,id',
+            'event_date'   => 'required|date|after:today',
+            'event_time'   => 'required|date_format:H:i',
             'guests_count' => 'required|integer|min:1',
-            'total_price' => 'required|numeric|min:0',
-            'notes' => 'nullable|string|max:1000',
+            'total_price'  => 'required|numeric|min:0',
+            'notes'        => 'nullable|string|max:1000',
         
         ];
     }

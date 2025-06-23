@@ -21,7 +21,7 @@ class ServiceController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $services
+            'data'    => $services
         ]);
     }
 
@@ -43,12 +43,12 @@ class ServiceController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => [
-                'id' => $service->id,
-                'name' => $service->name,
+            'data'    => [
+                'id'          => $service->id,
+                'name'        => $service->name,
                 'description' => $service->description,
-                'price' => $service->price,
-                'type' => $service->type
+                'price'       => $service->price,
+                'type'        => $service->type
             ]
         ]);
     }
@@ -67,7 +67,7 @@ class ServiceController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $service,
+            'data'    => $service,
             'message' => 'Service created successfully'
         ], 201);
     }
@@ -97,7 +97,7 @@ class ServiceController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $service,
+            'data'    => $service,
             'message' => 'Service updated successfully'
         ]);
     }

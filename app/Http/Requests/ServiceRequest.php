@@ -23,10 +23,10 @@ class ServiceRequest extends FormRequest
     {
         return [
 
-            'name' => 'sometimes|required|string|max:255',
+            'name'        => 'sometimes|required|string|max:255',
             'description' => 'nullable|string',
-            'price' => 'sometimes|required|numeric|min:0',
-            'type' => 'sometimes|required|string|max:255',
+            'price'       => 'sometimes|required|numeric|min:0',
+            'type'        => 'sometimes|required|string|max:255',
 
         ];
     }

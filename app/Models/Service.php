@@ -19,7 +19,7 @@ class Service extends Model
 
     protected $casts = [
         'is_active' => 'boolean',
-        'price' => 'decimal:2',
+        'price'     => 'decimal:2',
     ];
 
     // Scopes

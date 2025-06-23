@@ -23,14 +23,14 @@ class VenueRequest extends FormRequest
     {
         return [
 
-            'name' => 'sometimes|required|string|max:255',
-            'location' => 'sometimes|required|string|max:255',
-            'capacity' => 'sometimes|required|integer|min:1',
-            'price' => 'sometimes|required|numeric|min:0',
+            'name'        => 'sometimes|required|string|max:255',
+            'location'    => 'sometimes|required|string|max:255',
+            'capacity'    => 'sometimes|required|integer|min:1',
+            'price'       => 'sometimes|required|numeric|min:0',
             'description' => 'nullable|string',
-            'phone' => 'nullable|string|max:20',
-            'email' => 'nullable|email|max:255',
-       
+            'phone'       => 'nullable|string|max:20',
+            'email'       => 'nullable|email|max:255',
+
         ];
     }
 }

@@ -15,7 +15,7 @@ class BookController extends Controller
         $books = Book::latest()->paginate(15);
         return response()->json([
             'success' => true,
-            'data' => $books
+            'data'    => $books
         ]);
     }
 
@@ -31,7 +31,7 @@ class BookController extends Controller
         }
         return response()->json([
             'success' => true,
-            'data' => $book
+            'data'    => $book
         ]);
     }
 
@@ -42,7 +42,7 @@ class BookController extends Controller
         $book = Book::create($validated);
         return response()->json([
             'success' => true,
-            'data' => $book,
+            'data'    => $book,
             'message' => 'Book created successfully'
         ], 201);
     }
@@ -61,7 +61,7 @@ class BookController extends Controller
         $book->update($validated);
         return response()->json([
             'success' => true,
-            'data' => $book,
+            'data'    => $book,
             'message' => 'Book updated successfully'
         ]);
     }

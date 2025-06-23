@@ -22,14 +22,14 @@ class Bron extends Model
     ];
 
     protected $casts = [
-        'event_date' => 'date',
-        'event_time' => 'datetime',
-        'total_price' => 'decimal:2',
+        'event_date'   => 'date',
+        'event_time'   => 'datetime',
+        'total_price'  => 'decimal:2',
         'guests_count' => 'integer',
     ];
 
     // Status constants
-    const STATUS_PENDING = 'pending';
+    const STATUS_PENDING   = 'pending';
     const STATUS_CONFIRMED = 'confirmed';
     const STATUS_CANCELLED = 'cancelled';
     const STATUS_COMPLETED = 'completed';

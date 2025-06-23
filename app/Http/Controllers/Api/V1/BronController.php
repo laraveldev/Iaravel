@@ -56,7 +56,7 @@ class BronController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $bron
+            'data'    => $bron
         ]);
     }
 
@@ -68,15 +68,15 @@ class BronController extends Controller
 
 
         $bron = Bron::create([
-            'user_id' => $request->user_id,
-            'venue_id' => $request->venue_id,
-            'service_id' => $request->service_id,
-            'event_date' => $request->event_date,
-            'event_time' => $request->event_date . ' ' . $request->event_time,
+            'user_id'      => $request->user_id,
+            'venue_id'     => $request->venue_id,
+            'service_id'   => $request->service_id,
+            'event_date'   => $request->event_date,
+            'event_time'   => $request->event_date . ' ' . $request->event_time,
             'guests_count' => $request->guests_count,
-            'total_price' => $request->total_price,
-            'status' => Bron::STATUS_PENDING,
-            'notes' => $request->notes,
+            'total_price'  => $request->total_price,
+            'status'       => Bron::STATUS_PENDING,
+            'notes'        => $request->notes,
         ]);
 
         // Clear home page cache
@@ -84,7 +84,7 @@ class BronController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $bron->load(['user:id,name', 'venue:id,name', 'service:id,name']),
+            'data'    => $bron->load(['user:id,name', 'venue:id,name', 'service:id,name']),
             'message' => 'Bron created successfully'
         ], 201);
     }
@@ -120,7 +120,7 @@ class BronController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $bron->load(['user:id,name', 'venue:id,name', 'service:id,name']),
+            'data'    => $bron->load(['user:id,name', 'venue:id,name', 'service:id,name']),
             'message' => 'Bron updated successfully'
         ]);
     }
@@ -191,7 +191,7 @@ class BronController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $bron,
+            'data'    => $bron,
             'message' => 'Bron cancelled successfully'
         ]);
     }

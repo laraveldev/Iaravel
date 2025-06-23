@@ -22,8 +22,8 @@ class Venue extends Model
 
     protected $casts = [
         'is_active' => 'boolean',
-        'price' => 'decimal:2',
-        'capacity' => 'integer',
+        'price'     => 'decimal:2',
+        'capacity'  => 'integer',
     ];
 
     // Scopes
