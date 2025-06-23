@@ -17,4 +17,7 @@ Route::get('/venues/{id}', function ($id) {$venue = \App\Models\Venue::findOrFai
 
 Route::get('/books/{id}', function ($id) {$book = \App\Models\Book::findOrFail($id);return view('books.show', compact('book'));})->name('books.show');
 
-Route::get('/services/{id}', function ($id) {$service = \App\Models\Service::findOrFail($id);return view('services.show', compact('service'));})->name('services.show');
+Route::get('/services/{id}', function ($id) {
+    $service = \App\Models\Service::findOrFail($id);
+    return view('services.show', compact('service'));
+})->name('services.show');
