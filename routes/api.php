@@ -12,9 +12,9 @@ Route::middleware(['api.rate_limit'])->prefix('v1')->group(function () {
 
     Route::apiResource('services', ServiceController::class);
 
-    Route::apiResource('brons', BronController::class);
     Route::apiResource('books', BookController::class);
-    
+
+    Route::apiResource('brons', BronController::class); 
     Route::patch('brons/{id}/confirm', [BronController::class, 'confirm']);
     Route::patch('brons/{id}/cancel', [BronController::class, 'cancel']);
 });
