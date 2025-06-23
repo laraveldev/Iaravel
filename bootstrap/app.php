@@ -16,9 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->group('api', [
             'api.rate_limit',
         ]);
-        $middleware->group('web', [
-            'api.rate_limit',
-        ]);
+
     })
     ->withSchedule(function ($schedule) {
         $schedule->command('cache:refresh-daily')->dailyAt('00:00');
