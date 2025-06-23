@@ -146,7 +146,7 @@
                 <h5 class="mb-0">
                     <i class="fas fa-clock me-2"></i>So'nggi Bronlashlar
                 </h5>
-                <a href="/brons" class="btn btn-outline-primary btn-sm">
+                <a href="/api/brons" class="btn btn-outline-primary btn-sm">
                     Barchasini ko'rish <i class="fas fa-arrow-right ms-1"></i>
                 </a>
             </div>
